@@ -7,21 +7,30 @@ Tämä toteutus tekee kutakuinkin seuraavaa:
 * Kolme tuntia ennen alkamisaikaa lasketaan lämmitysaika uudelleen sen hetkisen säätiedon perusteella. Asetetaan uusi lämmityksen alkuaika.
   * (Tämä vaihe on lähinnä hienosäätöä, jos vaikka toteutunut lämpötila poikkeaakin kovasti aiemmin tutkitusta ennusteesta. Voit siis jättää tämän stepin väliin etenkin aluksi.)
 * Kun lämmityksen alkuaika koittaa:
-  *  Laitetaan lämmitystolpan kytkin päälle
+  *  Laitetaan lämmitystolpan pistorasia päälle
   *  Lähetetään ilmoitus kännykkään (ei pakollinen, mutta halusin itse varmistua että lämmitys meni päälle)
 
-Idea on siis se, että lämmitys menee päälle, kun kello on seuraavan kerran syötetyssä ajassa, eli alle vuorokauden päästä. Oma toteutukseni jättää sekä automaation, että kytkimen päälle, jolloin automaatio laukeaa taas seuraavan kerran kun kun kello tulee lähtöaikaan. Kytkin jätetään päälle, koska meillä tuota pistorasiaa käytetään muuhunkin. Eli aina kun lämmitys halutaan ajastaa ja laitetaan auton lämmityspiuha kiinni, pitää kytkin laittaa pois päältä. Myös dashboardilla tästä muistutetaan, kuten alla oleva kuva osoittaa. Jos auton käyttö on päivittäistä, kannattaa varmaankin laittaa kytkin automaatiolla pois päältä automaattisesti lämmityksen jälkeen. Kannattaa varmaan tehdä vasta jonkin viiveen jälkeen, koska et välttämättä lähde juuri aiottuna lähtöaikana, jolloin lämmitys menisi virheellisesti pois päältä jo ennen lähtöä.
+Idea on siis se, että lämmitys menee päälle, kun kello on seuraavan kerran syötetyssä ajassa, eli alle vuorokauden päästä. Oma toteutukseni jättää sekä automaation, että pistorasian päälle, jolloin automaatio laukeaa taas seuraavan kerran kun kun kello tulee lähtöaikaan. Pistorasia jätetään päälle, koska meillä tuota pistorasiaa käytetään muuhunkin. Eli aina kun lämmitys halutaan ajastaa ja laitetaan auton lämmityspiuha kiinni, pitää pistorasia laittaa pois päältä. Myös dashboardilla tästä muistutetaan, kuten alla oleva kuva osoittaa. Jos auton käyttö on päivittäistä, kannattaa varmaankin laittaa pistorasia automaatiolla pois päältä automaattisesti lämmityksen jälkeen. Kannattaa varmaan tehdä vasta jonkin viiveen jälkeen, koska et välttämättä lähde juuri aiottuna lähtöaikana, jolloin lämmitys menisi virheellisesti pois päältä jo ennen lähtöä.
 
 ## Dashboard, lähtöajan asetus
-Näkymä, kun kytkin on päällä:
-![kuva](https://github.com/user-attachments/assets/f170eaa0-f0d4-47b6-b875-b4568f826c10)
+Näkymä, kun pistorasia on päällä:
 
-Näkymä, kun kytkin ei ole päällä:
-![kuva](https://github.com/user-attachments/assets/f5d8feeb-4658-4f19-a615-32aba4889294)
+![Näyttökuva 2025-01-15 213950](https://github.com/user-attachments/assets/cab7d831-cb78-4c79-8623-145ee52a051a)
 
-Jos kytkin on valmiiksi päällä, muistuttaa yo. näkymä käyttäjää, että kytkin pitää laittaa pois päältä, ennen kuin lämmitysjohto laitetaan pistorasiaan. Muutoin lämmitys menisi heti päälle.
+Näkymä, kun pistorasia ei ole päällä:
 
-Kortin koodi:
+![Näyttökuva 2025-01-15 213914](https://github.com/user-attachments/assets/a214d74b-ced1-4fbf-86aa-7f27cf23b0cc)
+* **_Ajastin päällä_**:
+  * Auton lämmityksen kytkennän automaatio päälle/pois
+* **_Lähtöaika klo_**:
+  * Kellonaika, jolloin autolla aiotaan lähteä liikenteeseen.
+* **_Pistorasia_**: pistorasia päälle/pois. Pistorasia pitää olla pois, kun lämmitysjohto laitetaan seinään.
+* **_Lähtöaika_**: seuraava lähtöaika, eli seuraava hetki, kun kello on sama kuin _Lähtöaika klo_. Tämän perusteella automaatiot/skriptit laskevat lämmityksen alkamisajan. Tätä ei olisi pakko näyttää käyttäjälle, mutta itse pidän sen näkyvissä varmuuden vuoksi (voin varmistua, että hetki on laskettu oikein).
+* **_Lämpötilaennuste_**: ennusteen mukainen lämpötila lähtöaikana. Tämän perusteella automaatiot/skriptit laskevat tarvittavan lämmitysajan. Tämä päivitetään kolme tuntia ennen lähtöaikaa sen hetkisen säätiedon perusteella. Tässä käytetään _Meteorologisk institutt (Met.no)_-integraatiota, kun ei ole sopivaa anturia käytettävissä. On toiminut ihan riittävän tarkasti omaan tarpeeseen.
+
+Jos pistorasia on valmiiksi päällä, muistuttaa yo. näkymä käyttäjää, että pistorasia pitää laittaa pois päältä, ennen kuin lämmitysjohto laitetaan pistorasiaan. Muutoin lämmitys menisi heti päälle.
+
+Kortin koodi Home Assistantissa:
 ```
 type: entities
 entities:
