@@ -20,13 +20,15 @@ Näkymä, kun pistorasia on päällä:
 Näkymä, kun pistorasia ei ole päällä:
 
 ![Näyttökuva 2025-01-15 213914](https://github.com/user-attachments/assets/a214d74b-ced1-4fbf-86aa-7f27cf23b0cc)
-* **_Ajastin päällä_**:
+
+### Kenttien/entiteettien selitykset (entiteetin nimi suluissa)
+* **_Ajastin päällä (automation.aseta_auton_lammitys_paalle)_**:
   * Auton lämmityksen kytkennän automaatio päälle/pois
-* **_Lähtöaika klo_**:
+* **_Lähtöaika klo (input_datetime.auto_lahtoaika_klo)_**:
   * Kellonaika, jolloin autolla aiotaan lähteä liikenteeseen.
-* **_Pistorasia_**: pistorasia päälle/pois. Pistorasia pitää olla pois, kun lämmitysjohto laitetaan seinään.
-* **_Lähtöaika_**: seuraava lähtöaika, eli seuraava hetki, kun kello on sama kuin _Lähtöaika klo_. Tämän perusteella automaatiot/skriptit laskevat lämmityksen alkamisajan. Tätä ei olisi pakko näyttää käyttäjälle, mutta itse pidän sen näkyvissä varmuuden vuoksi (voin varmistua, että hetki on laskettu oikein).
-* **_Lämpötilaennuste_**: ennusteen mukainen lämpötila lähtöaikana. Tämän perusteella automaatiot/skriptit laskevat tarvittavan lämmitysajan. Tämä päivitetään kolme tuntia ennen lähtöaikaa sen hetkisen säätiedon perusteella. Tässä käytetään _Meteorologisk institutt (Met.no)_-integraatiota, kun ei ole sopivaa anturia käytettävissä. On toiminut ihan riittävän tarkasti omaan tarpeeseen.
+* **_Pistorasia (switch.katos_seina)_**: pistorasia päälle/pois. Pistorasia pitää olla pois, kun lämmitysjohto laitetaan seinään.
+* **_Lähtöaika (sensor.auto_lahtoaika)_**: seuraava lähtöaika, eli seuraava hetki, kun kello on sama kuin _Lähtöaika klo_. Tämän perusteella automaatiot/skriptit laskevat lämmityksen alkamisajan. Tätä ei olisi pakko näyttää käyttäjälle, mutta itse pidän sen näkyvissä varmuuden vuoksi (voin varmistua, että hetki on laskettu oikein).
+* **_Lämpötilaennuste (input_number.auto_lammitys_ulkolampotila)_**: ennusteen mukainen lämpötila lähtöaikana. Tämän perusteella automaatiot/skriptit laskevat tarvittavan lämmitysajan. Tämä päivitetään kolme tuntia ennen lähtöaikaa sen hetkisen säätiedon perusteella. Tässä käytetään _Meteorologisk institutt (Met.no)_-integraatiota, kun ei ole sopivaa anturia käytettävissä. On toiminut ihan riittävän tarkasti omaan tarpeeseen.
 
 Jos pistorasia on valmiiksi päällä, muistuttaa yo. näkymä käyttäjää, että pistorasia pitää laittaa pois päältä, ennen kuin lämmitysjohto laitetaan pistorasiaan. Muutoin lämmitys menisi heti päälle.
 
